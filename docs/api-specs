@@ -1,0 +1,145 @@
+# API Endpoints Documentation
+
+## Base URL
+`http://localhost:5000/api`
+
+## Endpoints
+
+### Bus Schedules
+
+#### Get All Bus Schedules
+- **URL:** `/admin/bus-schedules`
+- **Method:** `GET`
+- **Description:** Retrieve all bus schedules.
+- **Response:**
+    ```json
+    [
+        {
+            "id": 1,
+            "busId": 101,
+            "route": "Route A",
+            "departureTime": "08:00 AM",
+            "arrivalTime": "10:00 AM"
+        },
+        ...
+    ]
+    ```
+
+#### Create a New Bus Schedule
+- **URL:** `/admin/bus-schedules`
+- **Method:** `POST`
+- **Description:** Create a new bus schedule.
+- **Request Body:**
+    ```json
+    {
+        "busId": 101,
+        "route": "Route A",
+        "departureTime": "08:00 AM",
+        "arrivalTime": "10:00 AM"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "message": "Bus schedule created successfully",
+        "busSchedule": {
+            "id": 1,
+            "busId": 101,
+            "route": "Route A",
+            "departureTime": "08:00 AM",
+            "arrivalTime": "10:00 AM"
+        }
+    }
+    ```
+
+### Bus Info
+
+#### Get All Bus Info
+- **URL:** `/admin/bus-info`
+- **Method:** `GET`
+- **Description:** Retrieve all bus information.
+- **Response:**
+    ```json
+    [
+        {
+            "id": 1,
+            "busNumber": "Bus 101",
+            "capacity": 50,
+            "type": "AC"
+        },
+        ...
+    ]
+    ```
+
+#### Create a New Bus Info
+- **URL:** `/admin/bus-info`
+- **Method:** `POST`
+- **Description:** Create a new bus information entry.
+- **Request Body:**
+    ```json
+    {
+        "busNumber": "Bus 101",
+        "capacity": 50,
+        "type": "AC"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "message": "Bus info created successfully",
+        "busInfo": {
+            "id": 1,
+            "busNumber": "Bus 101",
+            "capacity": 50,
+            "type": "AC"
+        }
+    }
+    ```
+
+### Assign Bus
+
+#### Get All Assigned Buses
+- **URL:** `/admin/assign-bus`
+- **Method:** `GET`
+- **Description:** Retrieve all assigned buses.
+- **Response:**
+    ```json
+    [
+        {
+            "id": 1,
+            "busId": 101,
+            "driverId": 201,
+            "route": "Route A"
+        },
+        ...
+    ]
+    ```
+
+#### Assign a Bus
+- **URL:** `/admin/assign-bus`
+- **Method:** `POST`
+- **Description:** Assign a bus to a driver and route.
+- **Request Body:**
+    ```json
+    {
+        "busId": 101,
+        "driverId": 201,
+        "route": "Route A"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "message": "Bus assigned successfully",
+        "assignBus": {
+            "id": 1,
+            "busId": 101,
+            "driverId": 201,
+            "route": "Route A"
+        }
+    }
+    ```
+
+## Notes
+- Ensure that the server is running and the database is connected before making any requests.
+- Replace `localhost` with the actual server address when deploying to production.

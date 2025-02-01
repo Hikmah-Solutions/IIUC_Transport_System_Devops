@@ -1,0 +1,68 @@
+
+
+# For User 
+
+
+/frontend/user-app
+├── /public               # Static files (images, favicon, etc.)
+├── /src
+│   ├── /components       # Reusable UI components
+│   │   ├── /auth         # Authentication-related components
+│   │   ├── /layout       # Layouts (Header, Footer, Sidebar, etc.)
+│   │   └── /shared       # Shared reusable components (Button, Modal, etc.)
+│   ├── /pages            # Next.js pages (user-specific routes)
+│   │   ├── index.js      # Homepage for users
+│   │   ├── profile.js    # User profile page
+│   │   └── 404.js        # Custom 404 page
+│   ├── /utils            # Helper functions (e.g., formatters, constants)
+│   ├── /hooks            # Custom React hooks
+│   ├── /contexts         # React Context API (state management)
+│   ├── /services         # API service calls (e.g., axios configuration)
+│   │   └── api.js        # API utility file
+│   ├── /styles           # CSS/SCSS modules or global styles
+│   └── app.js            # Main application file
+├── next.config.js         # Next.js configuration
+└── package.json
+
+
+
+
+# For Admin
+
+
+/frontend/admin-panel
+├── /public               # Static files (images, favicon, etc.)
+├── /src
+│   ├── /components       # Reusable UI components
+│   │   ├── /auth         # Authentication-related components
+│   │   ├── /layout       # Admin-specific layouts
+│   │   └── /shared       # Shared reusable components
+│   ├── /pages            # Next.js pages (admin-specific routes)
+│   │   ├── index.js      # Admin dashboard
+│   │   ├── users.js      # Manage users page
+│   │   ├── logs.js       # Audit logs page
+│   │   └── 404.js        # Custom 404 page
+│   ├── /utils            # Helper functions
+│   ├── /hooks            # Custom React hooks
+│   ├── /contexts         # React Context API
+│   ├── /services         # API service calls
+│   │   └── api.js        # API utility file
+│   ├── /styles           # CSS/SCSS modules or global styles
+│   └── app.js            # Main application file
+├── next.config.js         # Next.js configuration
+└── package.json
+
+
+git branch backend
+
+git checkout backend
+
+git push origin backend
+
+git checkout backend
+
+git add .
+
+git commit -m "New file created for backend"
+
+git push origin backend
