@@ -1,38 +1,44 @@
+'use strict';
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable('AssignBuses', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
       },
       busNo: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       scheduleName: {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'BusSchedules', // Foreign key referencing scheduleName in BusSchedules
-          key: 'scheduleName'    // Ensure scheduleName is unique in BusSchedules
+          model: 'BusSchedules', // Name of the referenced table
+          key: 'scheduleName',   // Name of the referenced column
         },
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
       busType: {
         type: Sequelize.ENUM('Students', 'Teachers', 'Staff'),
-        allowNull: false
+        allowNull: false,
       },
       Gender: {
         type: Sequelize.ENUM('Both', 'Male', 'Female'),
-        allowNull: true
+        allowNull: true,
       },
-      createdAt: { type: Sequelize.DATE, allowNull: false },
-      updatedAt: { type: Sequelize.DATE, allowNull: false }
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
     });
   },
-
-  down: async (queryInterface, Sequelize) => {
+  async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('AssignBuses');
-  }
+  },
 };

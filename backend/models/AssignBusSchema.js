@@ -8,8 +8,8 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING, 
       allowNull: false, 
       references: { 
-        model: 'BusSchedules', 
-        key: 'scheduleName'  // Ensure this matches the unique scheduleName field in BusSchedules table
+        model: 'BusSchedules', // Ensure this matches the table name in the database
+        key: 'scheduleName'    // Reference the scheduleName column in BusSchedules
       },
       onDelete: 'CASCADE'
     },
@@ -20,7 +20,10 @@ module.exports = (sequelize) => {
   // Associations
   AssignBus.associate = (models) => {
     AssignBus.belongsTo(models.BusInfo, { foreignKey: 'busNo', onDelete: 'CASCADE' });
-    AssignBus.belongsTo(models.BusSchedule, { foreignKey: 'scheduleName', onDelete: 'CASCADE' });
+    AssignBus.belongsTo(models.BusSchedule, { 
+      foreignKey: 'scheduleName', // Match the foreign key in BusSchedule
+      onDelete: 'CASCADE'
+    });
   };
 
   return AssignBus;

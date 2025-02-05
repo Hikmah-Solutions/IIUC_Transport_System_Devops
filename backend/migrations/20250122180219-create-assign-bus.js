@@ -1,6 +1,6 @@
 'use strict';
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable('AssignBuses', {
       id: {
         type: Sequelize.INTEGER,
@@ -10,18 +10,13 @@ module.exports = {
       busNo: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'BusInfos', // Ensure this matches the table name for BusInfo model
-          key: 'busNo', // Ensure this matches the primary key in BusInfo table
-        },
-        onDelete: 'CASCADE',
       },
       scheduleName: {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'BusSchedules', // Ensure this matches the table name for BusSchedule model
-          key: 'scheduleName', // Ensure this matches the unique field in BusSchedule table
+          model: 'BusSchedules', // Name of the referenced table
+          key: 'scheduleName',   // Name of the referenced column
         },
         onDelete: 'CASCADE',
       },
@@ -34,17 +29,16 @@ module.exports = {
         allowNull: true,
       },
       createdAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
       updatedAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },
-
-  down: async (queryInterface, Sequelize) => {
+  async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('AssignBuses');
   },
 };

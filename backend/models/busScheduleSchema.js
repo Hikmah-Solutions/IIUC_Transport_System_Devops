@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
     scheduleName: { 
       type: DataTypes.STRING, 
       allowNull: false, 
-      unique: true 
+      unique: true // Ensure this is unique to act as a foreign key
     },
     route: { type: DataTypes.STRING, allowNull: false },
     startPoint: { type: DataTypes.STRING, allowNull: false },
@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
   // Corrected Association
   BusSchedule.associate = (models) => {
     BusSchedule.hasMany(models.AssignBus, { 
-      foreignKey: 'scheduleId',  // Foreign key should reference 'id', not 'scheduleName'
+      foreignKey: 'scheduleName', // Match the foreign key in AssignBus
       onDelete: 'CASCADE'
     });
   };
