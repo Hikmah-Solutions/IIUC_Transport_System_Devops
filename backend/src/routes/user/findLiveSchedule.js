@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 
     // Build the where clause for fetching schedules
     const whereClause = {
-      isActive: true,
+      // isActive: true,
       startPoint: from,
       endPoint: to,
       scheduleType,

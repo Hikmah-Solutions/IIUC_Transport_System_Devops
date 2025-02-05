@@ -20,8 +20,8 @@ const AddBus = () => {
   useEffect(() => {
     const fetchDriverAndHelperData = async () => {
       try {
-        const driverResponse = await fetch('http://localhost:5000/api/admin/driver-info');
-        const helperResponse = await fetch('http://localhost:5000/api/admin/helper-info');
+        const driverResponse = await fetch('https://iiuc-transport-system.onrender.com/api/admin/driver-info');
+        const helperResponse = await fetch('https://iiuc-transport-system.onrender.com/api/admin/helper-info');
 
         const driverData = await driverResponse.json();
         const helperData = await helperResponse.json();
@@ -80,7 +80,7 @@ const AddBus = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/admin/bus-info', {
+      const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/bus-info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ const AssignedBuses = () => {
 
   const fetchAssignments = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/assign-bus");
+      const response = await fetch("https://iiuc-transport-system.onrender.com/api/admin/assign-bus");
       const result = await response.json();
 
       if (response.ok) {

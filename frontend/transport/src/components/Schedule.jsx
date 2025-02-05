@@ -24,7 +24,7 @@ const AddSchedule = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/admin/bus-schedules', {
+      const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/bus-schedules', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

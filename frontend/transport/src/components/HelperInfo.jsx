@@ -13,7 +13,7 @@ const ShowHelperInfo = () => {
 
   const fetchHelperData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/admin/helper-info');
+      const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/helper-info');
       console.log(response.status); // Log status to debug
       const result = await response.json();
       console.log(result); // Log the response body

@@ -85,11 +85,11 @@ const App = () => {
         <Route
           path="/driverInfo"
           element={
-            // <ProtectedRoute isAuthenticated={isAuthenticated}>
-              // <AdminPanelLayout>
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <AdminPanelLayout>
                 <DriverInfo />
-              // </AdminPanelLayout>
-            // </ProtectedRoute>
+               </AdminPanelLayout>
+            </ProtectedRoute>
           }
         />
         <Route

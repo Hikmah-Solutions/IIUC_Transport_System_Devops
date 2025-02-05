@@ -64,13 +64,13 @@ app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 
 // API routes
-app.get('/api/data', (req, res) => {
-    res.json({ message: 'Backend is working!' });
-});
-// Serve React frontend for any unknown route (SPA support) 
-app.get('*', (req, res) => { 
-  res.sendFile(path.join(__dirname, 'frontend/transport/build', 'index.html')); 
-});
+// app.get('/api/data', (req, res) => {
+//     res.json({ message: 'Backend is working!' });
+// });
+// // Serve React frontend for any unknown route (SPA support) 
+// app.get('*', (req, res) => { 
+//   res.sendFile(path.join(__dirname, 'frontend/transport/build', 'index.html')); 
+// });
 
 
 

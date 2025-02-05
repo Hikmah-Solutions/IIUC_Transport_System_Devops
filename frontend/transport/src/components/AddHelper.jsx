@@ -23,7 +23,7 @@ const AddHelper = () => {
     }
   
     try {
-      const response = await fetch('http://localhost:5000/api/admin/helper-info', {
+      const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/helper-info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

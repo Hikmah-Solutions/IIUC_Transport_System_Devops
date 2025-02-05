@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';  
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';  
 
-const API_URL = 'http://localhost:5000/api/admin/trip-info'; // Update with your backend URL  
+const API_URL = 'https://iiuc-transport-system.onrender.com/api/admin/trip-info'; // Update with your backend URL  
 
 const styles = StyleSheet.create({  
   page: { padding: 20 },  
