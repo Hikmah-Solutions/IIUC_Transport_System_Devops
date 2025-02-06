@@ -34,6 +34,7 @@ const adminRoute = require('./src/routes/admin/adminRoute');
 const findLiveSchedule = require('./src/routes/user/findLiveSchedule');
 const liveTrackRoutes = require('./src/routes/user/liveTrackRoutes');
 const scheduleRoutes = require('./src/routes/user/scheduleRoutes');
+const showNearestBus = require('./src/routes/user/showNearestBus');
 // const supportRoutes = require('./src/routes/user/supportRoutes');
 
 // Initialize the Express app
@@ -79,6 +80,7 @@ app.use('/admin', adminRoute);
 app.use('/api/user/find-LiveSchedule',findLiveSchedule );
 app.use('/api/user/live-track',liveTrackRoutes );
 app.use('/api/user/schedule',scheduleRoutes );
+app.use('/api/user/nearest-bus',showNearestBus );
 // app.use('/api/user/support',supportRoutes );
 
 
