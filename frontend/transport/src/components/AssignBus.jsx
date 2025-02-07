@@ -7,6 +7,7 @@ const AssignNewBus = () => {
     busNo: '',
     scheduleName: '',
     busType: 'Students',
+    Gender: '',
     driverName: '',
     driverPhone: '',
     helperName: '',
@@ -84,7 +85,7 @@ const AssignNewBus = () => {
 
       if (response.ok) {
         alert('Bus assigned successfully.');
-        navigate('/');
+        navigate('/assignBus');
       } else {
         const result = await response.json();
         throw new Error(result.error || 'Failed to assign bus.');
@@ -129,6 +130,18 @@ const AssignNewBus = () => {
             <option value="Students">Students</option>
             <option value="Teachers">Teachers</option>
             <option value="Staff">Staff</option>
+          </select>
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-2">Gender</label>
+          <select
+            className="w-full border px-4 py-2 rounded"
+            value={newAssignment.Gender}
+            onChange={(e) => setNewAssignment({ ...newAssignment, Gender: e.target.value })}
+          >
+            <option value="Both">Both</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
           </select>
         </div>
         <div className="mb-4">

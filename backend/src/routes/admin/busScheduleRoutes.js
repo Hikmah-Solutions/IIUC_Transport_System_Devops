@@ -109,7 +109,7 @@ router.put('/:id', async (req, res) => {
     // }
 
     const [updated] = await BusSchedule.update(req.body, {
-      where: { scheduleId: req.params.id },
+      where: { id: req.params.id },
     });
     if (updated) {
       const updatedBusSchedule = await BusSchedule.findByPk(req.params.id);
@@ -126,7 +126,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const deleted = await BusSchedule.destroy({
-      where: { scheduleId: req.params.id },
+      where: { id: req.params.id },
     });
     if (deleted) {
       res.status(204).json('Deleted successfully.');
@@ -149,7 +149,7 @@ router.put('/:id/toggle', async (req, res) => {
 
     const [updated] = await BusSchedule.update(
       { isActive },
-      { where: { scheduleId: req.params.id } }
+      { where: { id: req.params.id } }
     );
     if (updated) {
       const updatedBusSchedule = await BusSchedule.findByPk(req.params.id);
@@ -163,6 +163,7 @@ router.put('/:id/toggle', async (req, res) => {
 });
 
 // Activate/Deactivate all schedules by type
+
 router.put('/toggleByType', async (req, res) => {
   try {
     const { type, isActive } = req.body;
@@ -171,7 +172,7 @@ router.put('/toggleByType', async (req, res) => {
       return res.status(400).json({ error: 'Invalid type or isActive value.' });
     }
 
-    const updatedCount = await BusSchedule.update(
+    const [updatedCount] = await BusSchedule.update(
       { isActive },
       { where: { scheduleType: type } }
     );

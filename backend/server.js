@@ -60,19 +60,6 @@ app.use('/api/admin/helper-info', helperInfoRoutes);
 app.use('/admin', adminRoute);
 
 
-// Serve the React frontend
-// app.use(express.static(path.join(__dirname, 'frontend/build')));
-
-
-// API routes
-// app.get('/api/data', (req, res) => {
-//     res.json({ message: 'Backend is working!' });
-// });
-// // Serve React frontend for any unknown route (SPA support) 
-// app.get('*', (req, res) => { 
-//   res.sendFile(path.join(__dirname, 'frontend/transport/build', 'index.html')); 
-// });
-
 
 
 // User routes

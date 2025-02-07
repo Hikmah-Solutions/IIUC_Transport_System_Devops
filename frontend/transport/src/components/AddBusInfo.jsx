@@ -10,6 +10,7 @@ const AddBus = () => {
   const [helperPhone, setHelperPhone] = useState('');
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // New state to track form submission
 
   const [drivers, setDrivers] = useState([]); // Store driver data
   const [helpers, setHelpers] = useState([]); // Store helper data
@@ -79,6 +80,8 @@ const AddBus = () => {
       return;
     }
 
+    setIsSubmitting(true); // Disable the submit button
+
     try {
       const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/bus-info', {
         method: 'POST',
@@ -116,6 +119,8 @@ const AddBus = () => {
       console.error('Error adding bus:', error);
       setIsSuccess(false);
       setMessage('Error adding bus. Please try again later.');
+    } finally {
+      setIsSubmitting(false); // Re-enable the submit button
     }
   };
 
@@ -269,8 +274,9 @@ const AddBus = () => {
         <button
           type="submit"
           className="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600 transition-all"
+          disabled={isSubmitting} // Disable the button while submitting
         >
-          Add Bus
+          {isSubmitting ? 'Adding...' : 'Add Bus'}
         </button>
       </form>
     </div>

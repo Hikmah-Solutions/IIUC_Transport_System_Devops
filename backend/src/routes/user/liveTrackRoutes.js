@@ -1,6 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
+const WebSocket = require('ws');
+
 
 const VTS_API_URL = process.env.SingleTrackurl; // Replace with actual VTS API URL
 const API_SECRET_KEY = process.env.SecretKey; // Replace with your API secret key
@@ -79,6 +81,40 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 });
+
+
+
+
+// WebSocket Server: Real-Time Updates
+const wss = new WebSocket.Server({ noServer: true });
+
+wss.on('connection', (ws, req) => {
+    const vehicleID = req.url.split('/').pop(); // Extract vehicleID from URL
+    console.log(`Client connected for vehicleID: ${vehicleID}`);
+
+    const interval = setInterval(async () => {
+        const location = await fetchBusLocation(vehicleID);
+        if (location) {
+            ws.send(JSON.stringify(location));
+        }
+    }, 5000); // Send updates every 5 seconds
+
+    ws.on('close', () => {
+        console.log(`Client disconnected for vehicleID: ${vehicleID}`);
+        clearInterval(interval);
+    });
+});
+
+// Upgrade HTTP Server to WebSocket
+const server = require('http').createServer();
+server.on('upgrade', (request, socket, head) => {
+    wss.handleUpgrade(request, socket, head, (ws) => {
+        wss.emit('connection', ws, request);
+    });
+});
+
+module.exports = { router, server };
+
 
 module.exports = router;
 

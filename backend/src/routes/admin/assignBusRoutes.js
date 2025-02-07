@@ -67,6 +67,16 @@ router.get('/', async (req, res) => {
 
     const assignBuses = await AssignBus.findAndCountAll({
       where: assignBusWhereClause,
+      include: [
+        {
+          model: BusInfo,
+          as: 'busInfo',
+        },
+        {
+          model: BusSchedule,
+          as: 'scheduleDetails',
+        },
+      ],
       limit,
       offset,
     });
@@ -82,18 +92,36 @@ router.get('/', async (req, res) => {
   }
 });
 
-
-// Sequelize association (ensure this is defined in your models/index.js or model definitions)
-AssignBus.belongsTo(BusSchedule, {
-  foreignKey: 'scheduleName', // The key in AssignBus that matches the key in BusSchedule
-  targetKey: 'scheduleName', // The key in BusSchedule
-  as: 'scheduleDetails',     // Alias for the join
+// Sequelize associations
+AssignBus.belongsTo(BusInfo, {
+  foreignKey: 'busNo',
+  targetKey: 'busNo',
+  as: 'busInfo',
 });
+
+AssignBus.belongsTo(BusSchedule, {
+  foreignKey: 'scheduleName',
+  targetKey: 'scheduleName',
+  as: 'scheduleDetails',
+});
+
 
 // Get a single assign bus by ID
 router.get('/:id', async (req, res) => {
   try {
-    const assignBus = await AssignBus.findByPk(req.params.id);
+    const assignBus = await AssignBus.findByPk(req.params.id, {
+      include: [
+        {
+          model: BusInfo,
+          as: 'busInfo',
+        },
+        {
+          model: BusSchedule,
+          as: 'scheduleDetails',
+        },
+      ],
+    });
+
     if (assignBus) {
       res.status(200).json(assignBus);
     } else {

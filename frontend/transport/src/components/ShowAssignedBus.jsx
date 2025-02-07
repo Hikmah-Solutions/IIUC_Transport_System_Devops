@@ -42,7 +42,7 @@ const AssignedBuses = () => {
     if (!updatedBusNo || !updatedScheduleName || !updatedBusType) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/assign-bus/${id}`, {
+      const response = await fetch(`https://iiuc-transport-system.onrender.com/api/admin/assign-bus/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -80,7 +80,7 @@ const AssignedBuses = () => {
     if (!window.confirm("Are you sure you want to delete this assignment?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/assign-bus/${id}`, {
+      const response = await fetch(`https://iiuc-transport-system.onrender.com/api/admin/assign-bus/${id}`, {
         method: "DELETE",
       });
 
@@ -98,7 +98,7 @@ const AssignedBuses = () => {
 
   const handleToggleActive = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/assign-bus/${id}/toggle-active`, {
+      const response = await fetch(`https://iiuc-transport-system.onrender.com/api/admin/assign-bus/${id}/toggle-active`, {
         method: "PATCH",
       });
 
@@ -170,14 +170,18 @@ const AssignedBuses = () => {
           <thead>
             <tr>
               <th className="py-2 px-4 border-b">Bus Number</th>
-              <th className="py-2 px-4 border-b">Schedule Name</th>
-              <th className="py-2 px-4 border-b">Bus Type</th>
-              <th className="py-2 px-4 border-b">Status</th>
-              <th className="py-2 px-4 border-b">Actions</th>
+              <th className="py-2 px-4 border-b">Slot Name</th>
+              <th className="py-2 px-4 border-b">Road</th>
+                <th className="py-2 px-4 border-b">Bus Type</th>
+                <th className="py-2 px-4 border-b">Gender</th>
+                <th className="py-2 px-4 border-b">Driver Name</th>
+                <th className="py-2 px-4 border-b">Helper Name</th>
+               <th className="py-2 px-4 border-b">Status</th>
+               <th className="py-2 px-4 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {filteredAssignments.map(({ id, busNo, scheduleName,busType, active }) => (
+            {filteredAssignments.map(({ id, busNo, scheduleName,route,Gender,driverName,helperName,busType, active }) => (
               <tr key={id}>
                 {editingId === id ? (
                   <>
@@ -200,6 +204,10 @@ const AssignedBuses = () => {
                   <>
                     <td className="py-2 px-4 border-b text-center">{busNo}</td>
                     <td className="py-2 px-4 border-b text-center">{scheduleName}</td>
+                    <td className="py-2 px-4 border-b text-center">{route}</td>
+                    <td className="py-2 px-4 border-b text-center">{Gender}</td>
+                    <td className="py-2 px-4 border-b text-center">{driverName}</td>
+                    <td className="py-2 px-4 border-b text-center">{helperName}</td>
                     <td className="py-2 px-4 border-b text-center">{busType}</td>
                     <td className="py-2 px-4 border-b text-center">{active ? "Active" : "Inactive"}</td>
                     <td className="py-2 px-4 border-b text-center">

@@ -72,6 +72,12 @@ const ShowSchedule = () => {
 
         {/* Assign New Bus */} 
         <button 
+          onClick={() => navigate('')} 
+          className="bg-red-500 hover:bg-green-600 text-white px-4 py-2 rounded" 
+        > 
+          Active/Inactive Schedule 
+        </button> 
+        <button 
           onClick={() => navigate('/addSchedule')} 
           className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded" 
         > 
@@ -90,10 +96,10 @@ const ShowSchedule = () => {
             <thead> 
               <tr> 
                 <th className="py-3 px-6 bg-gray-200 font-semibold text-gray-600 text-sm uppercase text-left"> 
-                  Schedule Name 
+                  Slot Name 
                 </th> 
                 <th className="py-3 px-6 bg-gray-200 font-semibold text-gray-600 text-sm uppercase text-left"> 
-                  Route 
+                  Road
                 </th> 
                 <th className="py-3 px-6 bg-gray-200 font-semibold text-gray-600 text-sm uppercase text-left"> 
                   Start Point 
@@ -106,6 +112,9 @@ const ShowSchedule = () => {
                 </th> 
                 <th className="py-3 px-6 bg-gray-200 font-semibold text-gray-600 text-sm uppercase text-left"> 
                   Schedule Type 
+                </th> 
+                <th className="py-3 px-6 bg-gray-200 font-semibold text-gray-600 text-sm uppercase text-left"> 
+                  Action
                 </th> 
               </tr> 
             </thead> 
