@@ -28,18 +28,23 @@ const tripInfoRoutes = require('./src/routes/admin/tripInfoRoutes');
 const assignBusRoutes = require('./src/routes/admin/assignBusRoutes');
 const driverInfoRoutes = require('./src/routes/admin/driverInfoRoutes');
 const helperInfoRoutes = require('./src/routes/admin/helperInfoRoutes');
-const adminRoute = require('./src/routes/admin/adminRoute');
+const adminFeedbackRoutes = require('./src/routes/admin/adminFeedbackRoutes');
+const notificationRoutes = require('./src/routes/admin/notificationRoutes');
+const adminRoute = require('./src/routes/admin/adminAuthRoute');
+const userRoutes = require('./src/routes/admin/userRoutes');
 
 // User routes Files Path
 const findLiveSchedule = require('./src/routes/user/findLiveSchedule');
 const liveTrackRoutes = require('./src/routes/user/liveTrackRoutes');
 const scheduleRoutes = require('./src/routes/user/scheduleRoutes');
 const showNearestBus = require('./src/routes/user/showNearestBus');
+const userNotificationRoutes = require('./src/routes/user/userNotificationRoutes');
+const userFeedback = require('./src/routes/user/userFeedback');
 // const supportRoutes = require('./src/routes/user/supportRoutes');
 
 // Initialize the Express app
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 
 
@@ -57,16 +62,21 @@ app.use('/api/admin/assign-bus', assignBusRoutes);
 app.use('/api/admin/trip-info', tripInfoRoutes);
 app.use('/api/admin/driver-info',driverInfoRoutes );
 app.use('/api/admin/helper-info', helperInfoRoutes);
-app.use('/admin', adminRoute);
+app.use('/api/admin/notification', notificationRoutes);
+app.use('/api/admin/feedback', adminFeedbackRoutes);
+app.use('/api/admin/auth', adminRoute);
+app.use('/api/admin/users', userRoutes);
 
 
 
 
 // User routes
 
-app.use('/api/user/find-LiveSchedule',findLiveSchedule );
-app.use('/api/user/live-track',liveTrackRoutes );
+app.use('/api/user/find-LiveSchedule', findLiveSchedule);
 app.use('/api/user/schedule',scheduleRoutes );
+app.use('/api/user/notification',userNotificationRoutes );
+app.use('/api/user/feedback',userFeedback );
+app.use('/api/user/live-track',liveTrackRoutes );
 app.use('/api/user/nearest-bus',showNearestBus );
 // app.use('/api/user/support',supportRoutes );
 

@@ -54,12 +54,17 @@ router.get('/', async (req, res) => {
           busNo: busInfo.busNo,
           vehicleId: busInfo.vehicleId,
           capacity: busInfo.capacity,
+          driverName: busInfo.driverName,
+          driverPhone: busInfo.driverPhone,
+          helperName: busInfo.helperName,
+          helperPhone: busInfo.helperPhone,
           startPoint: schedule.startPoint,
           endPoint: schedule.endPoint,
           routeName: schedule.route,
           scheduleDate: date,
           scheduleTime: schedule.time,
           busType: assignedBus.busType,
+          gender: assignedBus.Gender,
           additionalInfo: busInfo.additionalInfo || null,
         };
       })

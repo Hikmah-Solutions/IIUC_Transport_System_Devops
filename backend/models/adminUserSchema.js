@@ -1,13 +1,39 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  const User = sequelize.define('User', {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    name: { type: DataTypes.STRING, allowNull: false },
-    email: { type: DataTypes.STRING, allowNull: false, unique: true },
-    role: { type: DataTypes.ENUM('Super User','Admin', 'Manager', 'User'), allowNull: false }, // Different roles
-    password: { type: DataTypes.STRING, allowNull: false }, // Hashed password
-  }, { timestamps: true });
-
-  return User;
+  const AdminUser = sequelize.define('AdminUser', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    role: {
+      type: DataTypes.ENUM('Super Admin', 'Admin', 'Manager'),
+      defaultValue: 'Manager',
+    },
+    employee_position: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: null,
+    },
+  }, {
+    tableName: 'AdminUsers', // Explicitly set the table name
+  });
+  return AdminUser;
 };

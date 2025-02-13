@@ -22,6 +22,9 @@ const modelFiles = [
   'TripInfoSchema.js', 
   'DriverInfoSchema.js', 
   'HelperInfoSchema.js', 
+  'AdminUserSchema.js',
+  'notificationSchema.js',
+  'FeedbackSchema.js',
   
 ];
 
