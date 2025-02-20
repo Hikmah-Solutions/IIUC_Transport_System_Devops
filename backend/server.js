@@ -49,7 +49,7 @@ const PORT = process.env.PORT || 5000;
 
 
 // Middleware setup
-const allowedOrigins = ['https://iiuc-transport-admin-panel.vercel.app/']; // Add your frontend URL here
+const allowedOrigins = ['https://iiuc-transport-admin-panel.vercel.app/','https://iiucbus.vercel.app/']; // Add your frontend URL here
 app.use(cors({
   origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
