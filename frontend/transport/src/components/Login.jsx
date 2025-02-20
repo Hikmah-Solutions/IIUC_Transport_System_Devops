@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // For navigation
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,19 +14,40 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/login', {
+      const response = await fetch('http://147.93.107.88:5000/api/admin/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Invalid credentials');
       }
 
-      const { token } = await response.json();
-      localStorage.setItem('adminToken', token); // Store token in local storage
-      navigate('/admin/dashboard'); // Redirect to the admin dashboard
+      const { token, role } = await response.json(); // Assume backend returns both token and role
+
+      // Store token and role in local storage
+      localStorage.setItem('token', token);
+      localStorage.setItem('userRole', role);
+
+      // Redirect based on user role
+      switch (role) {
+        case 'Super Admin':
+          navigate('/admin/dashboard');
+          break;
+        case 'Driver':
+          navigate('/driver/dashboard');
+          break;
+        case 'Helper':
+          navigate('/helper/dashboard');
+          break;
+        case 'Student':
+          navigate('/student/dashboard');
+          break;
+        default:
+          navigate('/admin/dashboard');
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -37,15 +58,15 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-2xl font-semibold text-center mb-6">Admin Login</h2>
+        <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Username</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
             <input
               type="text"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your username"
-              value={username}
+              value={email}
               onChange={(e) => setUsername(e.target.value)}
               required
             />

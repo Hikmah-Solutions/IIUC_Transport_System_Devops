@@ -49,7 +49,13 @@ const PORT = process.env.PORT || 5000;
 
 
 // Middleware setup
-app.use(cors()); // Enable Cross-Origin Resource Sharing
+const allowedOrigins = ['https://iiuc-transport-admin-panel.vercel.app/']; // Add your frontend URL here
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 
 app.use(bodyParser.json()); // Parse JSON request bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded request bodies

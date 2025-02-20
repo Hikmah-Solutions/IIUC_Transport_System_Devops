@@ -11,7 +11,8 @@ const busInfoSchema = Joi.object({
     driverPhone: Joi.string().required(),
     helperName: Joi.string().required(),
     helperPhone: Joi.string().required(),
-    capacity: Joi.number().required()
+    capacity: Joi.number().required(),
+    isActive: Joi.boolean().default(true),
 });
 
 router.post('/', async (req, res) => {
@@ -30,7 +31,8 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const {
-            busNo,        // Search by bus number
+            busNo,
+            isActive,// Search by bus number
             page = 1,     // Default to page 1
             size = 10     // Default page size
         } = req.query;

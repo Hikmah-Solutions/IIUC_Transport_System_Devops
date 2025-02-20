@@ -12,7 +12,7 @@ const ShowSchedule = () => {
   useEffect(() => { 
     const fetchSchedules = async () => { 
       try { 
-        const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/bus-schedules'); 
+        const response = await fetch('http://147.93.107.88:5000/api/admin/bus-schedules'); 
         const result = await response.json(); 
 
         if (response.ok) { 

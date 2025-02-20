@@ -21,8 +21,8 @@ const AddBus = () => {
   useEffect(() => {
     const fetchDriverAndHelperData = async () => {
       try {
-        const driverResponse = await fetch('https://iiuc-transport-system.onrender.com/api/admin/driver-info');
-        const helperResponse = await fetch('https://iiuc-transport-system.onrender.com/api/admin/helper-info');
+        const driverResponse = await fetch('http://147.93.107.88:5000/api/admin/driver-info');
+        const helperResponse = await fetch('http://147.93.107.88:5000/api/admin/helper-info');
 
         const driverData = await driverResponse.json();
         const helperData = await helperResponse.json();
@@ -83,7 +83,7 @@ const AddBus = () => {
     setIsSubmitting(true); // Disable the submit button
 
     try {
-      const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/bus-info', {
+      const response = await fetch('http://147.93.107.88:5000/api/admin/bus-info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -11,7 +11,7 @@ const ShowHelperInfo = () => {
   // Function to fetch helper data
   const fetchHelperData = async () => {
     try {
-      const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/helper-info');
+      const response = await fetch('http://147.93.107.88:5000/api/admin/helper-info');
       console.log(response.status); // Log status to debug
       const result = await response.json();
       console.log(result); // Log the response body
@@ -38,7 +38,7 @@ const ShowHelperInfo = () => {
 
     try {
       const response = await fetch(
-        `https://iiuc-transport-system.onrender.com/api/admin/helper-info/${helperID}`,
+        `http://147.93.107.88:5000/api/admin/helper-info/${helperID}`,
         {
           method: 'DELETE',
         }
@@ -66,7 +66,7 @@ const ShowHelperInfo = () => {
   const saveEdit = async (helperID) => {
     try {
       const response = await fetch(
-        `https://iiuc-transport-system.onrender.com/api/admin/helper-info/${helperID}`,
+        `http://147.93.107.88:5000/api/admin/helper-info/${helperID}`,
         {
           method: 'PUT',
           headers: {

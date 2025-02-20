@@ -20,7 +20,7 @@ const AssignNewBus = () => {
   const fetchBusDetails = async (busNo) => {
     setLoading(true);
     try {
-      const response = await fetch(`https://iiuc-transport-system.onrender.com/api/admin/bus-info/${busNo}`);
+      const response = await fetch(`http://147.93.107.88:5000/api/admin/bus-info/${busNo}`);
       if (response.ok) {
         const busData = await response.json();
         setNewAssignment((prev) => ({
@@ -75,7 +75,7 @@ const AssignNewBus = () => {
     };
 
     try {
-      const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/assign-bus', {
+      const response = await fetch('http://147.93.107.88:5000/api/admin/assign-bus', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

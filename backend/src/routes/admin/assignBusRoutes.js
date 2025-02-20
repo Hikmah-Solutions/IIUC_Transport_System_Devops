@@ -8,9 +8,9 @@ const assignBusSchema = Joi.object({
   busNo: Joi.number().integer().required(),
   scheduleName: Joi.string().required(),
   busType: Joi.string().valid('Students', 'Teachers', 'Staff').required(),
+  Gender: Joi.string().valid('N/A','Male', 'Female', 'Both').required(), // Add gender field
   active: Joi.boolean(), // Optional, defaults to true
 });
-
 // Create a new assign bus
 router.post('/', async (req, res) => {
   try {
@@ -43,7 +43,6 @@ router.post('/', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 // Get all assign buses
 router.get('/', async (req, res) => {
   try {

@@ -18,7 +18,7 @@ const ShowBusInfo = () => {
 
   const fetchBusData = async () => {
     try {
-      const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/bus-info');
+      const response = await fetch('http://147.93.107.88:5000/api/admin/bus-info');
       const result = await response.json();
   
       console.log(result); // Inspect response structure
@@ -38,7 +38,7 @@ const ShowBusInfo = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this bus?')) {
       try {
-        const response = await fetch(`https://iiuc-transport-system.onrender.com/api/admin/bus-info/${id}`, {
+        const response = await fetch(`http://147.93.107.88:5000/api/admin/bus-info/${id}`, {
           method: 'DELETE',
         });
 
@@ -72,7 +72,7 @@ const ShowBusInfo = () => {
 
   const updateBus = async (id, updatedFields) => {
     try {
-      const response = await fetch(`https://iiuc-transport-system.onrender.com/api/admin/bus-info/${id}`, {
+      const response = await fetch(`http://147.93.107.88:5000/api/admin/bus-info/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

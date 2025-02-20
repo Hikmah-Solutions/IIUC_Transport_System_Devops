@@ -7,7 +7,6 @@ const { Op } = require('sequelize');
 router.get('/fetch-trip-info', async (req, res) => {
   try {
     const { busNo, tripDate } = req.query;
-
     // If busNo is provided, fetch trip info for that bus only
     if (busNo) {
       const tripInfo = await TripTable.findAll({
@@ -91,17 +90,17 @@ router.post('/manual-trip', async (req, res) => {
   try {
     const { busNo, startPoint, noOfStudents, subsDriverName, subsHelperName } = req.body;
 
-    // ✅ Validate required fields
+    //Validate required fields
     if (!busNo || !startPoint || !noOfStudents) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // ✅ Ensure data types are correct
+    // Ensure data types are correct
     if (isNaN(busNo) || isNaN(noOfStudents)) {
       return res.status(400).json({ error: 'Invalid data type for busNo or noOfStudents' });
     }
 
-    // ✅ Fetch the bus info based on busNo to get driverName and helperName
+    //Fetch the bus info based on busNo to get driverName and helperName
     const busInfo = await BusInfo.findOne({ where: { busNo } });
 
     if (!busInfo) {
@@ -111,7 +110,7 @@ router.post('/manual-trip', async (req, res) => {
     // Get driver and helper details from BusInfo
     const { driverName, helperName } = busInfo;
 
-    // ✅ Create the trip entry manually with default values for subsDriverName and subsHelperName
+    //Create the trip entry manually with default values for subsDriverName and subsHelperName
     const newTrip = await TripTable.create({
       busNo,
       startPoint,

@@ -23,7 +23,7 @@ const AddDriver = () => {
     }
 
     try {
-      const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/driver-info', {
+      const response = await fetch('http://147.93.107.88:5000/api/admin/driver-info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

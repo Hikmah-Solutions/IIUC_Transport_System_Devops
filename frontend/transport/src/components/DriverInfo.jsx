@@ -11,7 +11,7 @@ const ShowDriverInfo = () => {
   // Function to fetch driver data
   const fetchDriverData = async () => {
     try {
-      const response = await fetch('https://iiuc-transport-system.onrender.com/api/admin/driver-info');
+      const response = await fetch('http://147.93.107.88:5000/api/admin/driver-info');
       const result = await response.json();
       if (response.ok) {
         setDrivers(result || []);
@@ -36,7 +36,7 @@ const ShowDriverInfo = () => {
 
     try {
       const response = await fetch(
-        `https://iiuc-transport-system.onrender.com/api/admin/driver-info/${driverID}`,
+        `http://147.93.107.88:5000/api/admin/driver-info/${driverID}`,
         {
           method: 'DELETE',
         }
@@ -64,7 +64,7 @@ const ShowDriverInfo = () => {
   const saveEdit = async (driverID) => {
     try {
       const response = await fetch(
-        `https://iiuc-transport-system.onrender.com/api/admin/driver-info/${driverID}`,
+        `http://147.93.107.88:5000/api/admin/driver-info/${driverID}`,
         {
           method: 'PUT',
           headers: {

@@ -15,7 +15,7 @@ const AssignedBuses = () => {
 
   const fetchAssignments = async () => {
     try {
-      const response = await fetch("https://iiuc-transport-system.onrender.com/api/admin/assign-bus");
+      const response = await fetch("http://147.93.107.88:5000/api/admin/assign-bus");
       const result = await response.json();
 
       if (response.ok) {
@@ -42,7 +42,7 @@ const AssignedBuses = () => {
     if (!updatedBusNo || !updatedScheduleName || !updatedBusType) return;
 
     try {
-      const response = await fetch(`https://iiuc-transport-system.onrender.com/api/admin/assign-bus/${id}`, {
+      const response = await fetch(`http://147.93.107.88:5000/api/admin/assign-bus/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -80,7 +80,7 @@ const AssignedBuses = () => {
     if (!window.confirm("Are you sure you want to delete this assignment?")) return;
 
     try {
-      const response = await fetch(`https://iiuc-transport-system.onrender.com/api/admin/assign-bus/${id}`, {
+      const response = await fetch(`http://147.93.107.88:5000/api/admin/assign-bus/${id}`, {
         method: "DELETE",
       });
 
@@ -98,7 +98,7 @@ const AssignedBuses = () => {
 
   const handleToggleActive = async (id) => {
     try {
-      const response = await fetch(`https://iiuc-transport-system.onrender.com/api/admin/assign-bus/${id}/toggle-active`, {
+      const response = await fetch(`http://147.93.107.88:5000/api/admin/assign-bus/${id}/toggle-active`, {
         method: "PATCH",
       });
 
