@@ -17,12 +17,18 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         department: {
-            type: DataTypes.ENUM('CSE', 'EEE', 'CE', 'CCE', 'ETE', 'BBA', 'QSIS', 'DHIS', 'DIS', 'EB', 'ALL', 'LAW', 'Other'), // Add all relevant departments
+            type: DataTypes.ENUM('CSE', 'EEE', 'CE', 'CCE', 'ETE', 'BBA', 'QSIS','ELL', 'DHIS', 'DIS', 'EB', 'ALL', 'LAW','PHARMACY', 'Other'), // Add all relevant departments
             allowNull: false,
         },
         userType: {
             type: DataTypes.ENUM('Student', 'Teacher', 'Staff', 'Other'),
             allowNull: false,
+            defaultValue: 'Feedback',
+        },
+        feedbackType: {
+            type: DataTypes.ENUM('Complaint', 'Suggestion', 'Feedback', 'Others'),
+            allowNull: false,
+            defaultValue: 'Feedback',
         },
         message: {
             type: DataTypes.TEXT,
