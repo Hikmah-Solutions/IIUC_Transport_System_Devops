@@ -32,6 +32,8 @@ const adminFeedbackRoutes = require('./src/routes/admin/adminFeedbackRoutes');
 const notificationRoutes = require('./src/routes/admin/notificationRoutes');
 const adminRoute = require('./src/routes/admin/adminAuthRoute');
 const userRoutes = require('./src/routes/admin/userRoutes');
+const adminDashboardRoutes = require('./src/routes/admin/adminDashboardRoutes');
+
 
 // User routes Files Path
 const findLiveSchedule = require('./src/routes/user/findLiveSchedule');
@@ -49,12 +51,19 @@ const PORT = process.env.PORT || 5000;
 
 
 // Middleware setup
-const allowedOrigins = ['https://iiuc-transport-admin-panel.vercel.app', 'https://iiucbus.vercel.app']; // Add your frontend URL here
 app.use(cors({
-  origin: allowedOrigins,
+  origin: '*', // Allows all origins
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+// const allowedOrigins = ['https://iiuc-transport-admin-panel.vercel.app', 'https://iiucbus.vercel.app']; // Add your frontend URL here
+// app.use(cors({
+//   origin: allowedOrigins,
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+// }));
+
+
 
 // Logging middleware (optional)
 app.use((req, res, next) => {
@@ -78,6 +87,7 @@ app.use('/api/admin/notification', notificationRoutes);
 app.use('/api/admin/feedback', adminFeedbackRoutes);
 app.use('/api/admin/auth', adminRoute);
 app.use('/api/admin/users', userRoutes);
+app.use('/api/admin/dashboard', adminDashboardRoutes);
 
 
 
