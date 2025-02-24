@@ -85,4 +85,16 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// router.get('/suggestions', async (req, res) => {
+//   try {
+//     const driverInfo = await DriverInfo.findAll({
+//       attributes: ['driverName', 'phone']
+//     });
+//     res.status(200).json(driverInfo); // Return only the driverName and phone fields
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+
+
 module.exports = router;

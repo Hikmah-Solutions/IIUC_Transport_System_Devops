@@ -84,4 +84,16 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+
+// router.get('/suggestions', async (req, res) => {
+//   try {
+//     const helperInfo = await HelperInfo.findAll({
+//       attributes: ['name', 'phone']
+//     });
+//     res.status(200).json(helperInfo);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+
 module.exports = router;
