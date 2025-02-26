@@ -72,11 +72,11 @@ router.get('/', async (req, res) => {
 });
 
 // GET route to fetch bus information by bus number
-router.get('/:busNo', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
-        const { busNo } = req.params;
-        console.log(`Fetching bus information for bus number: ${busNo}`); // Add logging
-        const busInfo = await BusInfo.findOne({ where: { busNo } });
+        const { id } = req.params;
+        console.log(`Fetching bus information for bus number: ${id}`); // Add logging
+        const busInfo = await BusInfo.findOne({ where: { id } });
         if (!busInfo) {
             console.log('Bus information not found'); // Add logging
             return res.status(404).json({ error: 'Bus information not found' });
