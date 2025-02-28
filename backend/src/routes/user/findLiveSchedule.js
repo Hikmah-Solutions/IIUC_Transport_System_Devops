@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { BusInfo, BusSchedule, AssignBus } = require('../../../models');
 
-
 router.get('/', async (req, res) => {
   const { date, from, to } = req.query;
   if (!date || !from || !to) {
@@ -14,16 +13,47 @@ router.get('/', async (req, res) => {
       return res.status(400).json({ message: 'Invalid date format' });
     }
     const dayOfWeek = parsedDate.toLocaleString('en-US', { weekday: 'long' });
-    const scheduleType = dayOfWeek === 'Friday' ? 'Friday Schedule' : 'Regular Schedule';
-    const whereClause = {
-      startPoint: from,
-      endPoint: to,
-      scheduleType,
-    };
+
+    // Determine the schedule type based on the day of the week and active status
+    let scheduleTypes = [];
+    if (dayOfWeek === 'Friday') {
+      scheduleTypes.push('Friday Schedule');
+    } else if (dayOfWeek === 'Thursday') {
+      scheduleTypes.push('Residential Schedule');
+    } else {
+      // Check for active Exam Schedule and Special Schedule
+      const activeExamSchedule = await BusSchedule.findOne({
+        where: { scheduleType: 'Exam Schedule', isActive: true }
+      });
+      const activeSpecialSchedule = await BusSchedule.findOne({
+        where: { scheduleType: 'Special Schedule', isActive: true }
+      });
+
+      if (activeSpecialSchedule) {
+        scheduleTypes.push('Special Schedule');
+      } else if (activeExamSchedule) {
+        scheduleTypes.push('Exam Schedule');
+      } else {
+        scheduleTypes.push('Regular Schedule');
+      }
+    }
+
+    // Check for active Library Schedule
+    const activeLibrarySchedule = await BusSchedule.findOne({
+      where: { scheduleType: 'Library Schedule', isActive: true }
+    });
+    if (activeLibrarySchedule && dayOfWeek !== 'Thursday') {
+      scheduleTypes.push('Library Schedule');
+    }
 
     // Fetch schedules
     const schedules = await BusSchedule.findAll({
-      where: whereClause,
+      where: {
+        startPoint: from,
+        endPoint: to,
+        scheduleType: scheduleTypes,
+        isActive: true
+      }
     });
     console.log('Fetched Schedules:', JSON.stringify(schedules, null, 2));
 
@@ -36,7 +66,7 @@ router.get('/', async (req, res) => {
       schedules.map(async (schedule) => {
         console.log(`Processing schedule: ${schedule.scheduleName}`);
         const assignedBus = await AssignBus.findOne({
-          where: { scheduleName: schedule.scheduleName},
+          where: { scheduleName: schedule.scheduleName },
         });
         console.log(`Assigned Bus for ${schedule.scheduleName}:`, assignedBus);
 
@@ -83,4 +113,5 @@ router.get('/', async (req, res) => {
     return res.status(500).json({ message: 'Failed to fetch available buses and routes' });
   }
 });
+
 module.exports = router;

@@ -5,8 +5,8 @@ const { BusSchedule } = require('../../../models');
 router.get('/', async (req, res) => {
   try {
     const {
-      scheduleType = 'Regular Schedule', // Default to "Regular Schedule"
-      isActive = 'true', // Default to show only active schedules
+      scheduleType, // Default to "Regular Schedule"
+      // isActive = 'true', // Default to show only active schedules
       startPoint, // Filter by start point
       endPoint,   // Filter by end point
       direction,  // "From University" or "To University"
@@ -17,16 +17,16 @@ router.get('/', async (req, res) => {
     // Build dynamic where clause based on provided filters
     const whereClause = {
       ...(scheduleType && { scheduleType }), // Apply default or user-provided scheduleType
-      ...(isActive !== undefined && { isActive: isActive === 'true' }), // Filter active status
+      // ...(isActive !== undefined && { isActive: isActive === 'true' }), // Filter active status
       ...(startPoint && { startPoint }), // Filter by startPoint if provided
       ...(endPoint && { endPoint }),     // Filter by endPoint if provided
     };
 
     // Handle "From University" or "To University"
     if (direction === 'From University') {
-      whereClause.startPoint = 'University'; // Assuming 'University' is the default start point
+      whereClause.startPoint = 'IIUC'; // Assuming 'University' is the default start point
     } else if (direction === 'To University') {
-      whereClause.endPoint = 'University'; // Assuming 'University' is the default end point
+      whereClause.endPoint = 'IIUC'; // Assuming 'University' is the default end point
     }
 
     // Pagination
@@ -57,13 +57,11 @@ router.get('/', async (req, res) => {
 router.get('/suggestions', async (req, res) => {
   try {
     const startPoints = await BusSchedule.findAll({
-      attributes: [[sequelize.fn('DISTINCT', sequelize.col('startPoint')), 'startPoint']],
-      where: { isActive: true },
+      attributes: [[sequelize.fn('DISTINCT', sequelize.col('startPoint')), 'startPoint']]
     });
 
     const endPoints = await BusSchedule.findAll({
-      attributes: [[sequelize.fn('DISTINCT', sequelize.col('endPoint')), 'endPoint']],
-      where: { isActive: true },
+      attributes: [[sequelize.fn('DISTINCT', sequelize.col('endPoint')), 'endPoint']]
     });
 
     const uniqueStartPoints = startPoints.map(point => point.startPoint);

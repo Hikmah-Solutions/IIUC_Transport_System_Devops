@@ -1,7 +1,7 @@
 const express = require('express');
 const { Notification } = require('../../../models'); // Adjust path as needed
 const router = express.Router();
-
+// const webPush = require('../../../config/webPushConfig'); // Adjust path as needed
 // Create a new notification
 router.post('/', async (req, res) => {
   try {
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
     });
 
     // Send push notifications or SMS alerts (optional integration)
-    sendNotificationToRecipients(recipientType, title, message);
+    // sendNotificationToRecipients(recipientType, title, message);
 
     res.status(201).json({ message: 'Notification created successfully', notification });
   } catch (error) {
@@ -31,10 +31,21 @@ router.post('/', async (req, res) => {
 });
 
 // Helper function to send notifications (e.g., via Firebase or Twilio)
-const sendNotificationToRecipients = (recipientType, title, message) => {
-  // Example: Use Firebase Cloud Messaging (FCM) or Twilio for sending notifications
-  console.log(`Sending ${title} to ${recipientType}: ${message}`);
-};
+// const sendNotificationToRecipients = (recipientType, title, message) => {
+//   const payload = JSON.stringify({
+//     title,
+//     message,
+//   });
+
+//   webPush.sendNotification(recipientType, payload)
+//     .then(response => {
+//       console.log('Successfully sent message:', response);
+//     })
+//     .catch(error => {
+//       console.error('Error sending message:', error);
+//     });
+// };
+
 
 router.get('/', async (req, res) => {
   try {

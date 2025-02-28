@@ -49,7 +49,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 
-
 // Middleware setup
 app.use(cors({
   origin: '*', // Allows all origins
@@ -88,9 +87,6 @@ app.use('/api/admin/feedback', adminFeedbackRoutes);
 app.use('/api/admin/auth', adminRoute);
 app.use('/api/admin/users', userRoutes);
 app.use('/api/admin/dashboard', adminDashboardRoutes);
-
-
-
 
 // User routes
 

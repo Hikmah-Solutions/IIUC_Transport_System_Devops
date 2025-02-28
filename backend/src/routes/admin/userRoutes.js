@@ -16,6 +16,20 @@ router.get('/', authMiddleware(['Super Admin']), async (req, res) => {
   }
 });
 
+
+// Get a single user by ID (Only Super Admin)
+router.get('/:id', authMiddleware(['Super Admin']), async (req, res) => {
+  try {
+    const user = await AdminUser.findByPk(req.params.id, {
+      attributes: ['id', 'name', 'email', 'role', 'employee_position'], // Exclude sensitive fields like password
+    });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+});
+
 // Update a user (Only Super Admin)
 router.put('/:id', authMiddleware(['Super Admin']), async (req, res) => {
   const { name, email, role, employee_position } = req.body;
